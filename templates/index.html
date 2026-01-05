@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integral Calculator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+
+    <!-- MathJax -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Kalkulator Integral Tentu</h1>
+            <p class="subtitle">Visualisasi dan pemahaman luas daerah di bawah kurva.</p>
+        </header>
+
+        <main class="app-layout">
+            <section class="input-section card">
+                <h2>Parameter Input</h2>
+                <form id="calculator-form">
+                    <div class="form-group">
+                        <label for="function-input">Fungsi, $f(x)$</label>
+                        <input type="text" id="function-input" name="function" placeholder="contoh: x^2, sin(x), exp(x)"
+                            required>
+                        <small>Mendukung: trig (sin, cos), log, exp, sqrt, polinomial.</small>
+                    </div>
+
+                    <div class="bounds-group">
+                        <div class="form-group">
+                            <label for="lower-bound">Batas Bawah ($a$)</label>
+                            <input type="number" id="lower-bound" name="lower" placeholder="0" step="any" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="upper-bound">Batas Atas ($b$)</label>
+                            <input type="number" id="upper-bound" name="upper" placeholder="1" step="any" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="calculate-btn">Hitung Integral</button>
+                    <div id="error-message" class="error hidden"></div>
+                </form>
+
+                <div id="result-summary" class="result-summary hidden">
+                    <h3>Hasil</h3>
+                    <div class="math-result">
+                        $$ \int_{a}^{b} f(x) \, dx = \text{?} $$
+                    </div>
+                </div>
+            </section>
+
+            <section class="visualization-section card">
+                <h2>Visualisasi</h2>
+                <div id="plot-container"></div>
+            </section>
+        </main>
+
+        <section id="steps-section" class="steps-section card hidden">
+            <h2>Langkah-Langkah Penyelesaian</h2>
+            <div id="steps-content"></div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
