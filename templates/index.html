@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Integral Calculator</title>
-    <!-- Google Fonts -->
+    <title>Kalkulator Integral</title>
+
+    <!-- mengimpor font 'Outfit' agar tampilan lebih modern -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Plotly.js -->
+    <!-- library JavaScript untuk membuat grafik interaktif -->
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
 
-    <!-- MathJax -->
+    <!-- library untuk merender rumus matematika LaTeX di web -->
     <script>
+        // Konfigurasi MathJax
         MathJax = {
             tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
+                inlineMath: [['$', '$'], ['\\(', '\\)']] // Mengizinkan penulisan rumus di antara tanda $..$
             },
             svg: {
                 fontCache: 'global'
@@ -28,28 +30,36 @@
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         </script>
 
-    <!-- App Styles -->
+    <!-- Menghubungkan file CSS buatan sendiri -->
+    <!-- 'url_for' adalah fungsi Flask untuk menghasilkan URL statis yang benar -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
+    <!-- Container utama untuk membatasi lebar konten -->
     <div class="container">
+        <!-- Header aplikasi -->
         <header>
             <h1>Kalkulator Integral Tentu</h1>
             <p class="subtitle">Visualisasi dan pemahaman luas daerah di bawah kurva.</p>
         </header>
 
+        <!-- Main layout: Menggunakan Grid (di CSS) untuk membagi area Input dan Visualisasi -->
         <main class="app-layout">
+
+            <!-- Section Kiri: Form Input -->
             <section class="input-section card">
                 <h2>Parameter Input</h2>
+                <!-- Form id="calculator-form" ini akan ditangani oleh JavaScript -->
                 <form id="calculator-form">
+                    <!-- Input untuk Fungsi Matematika -->
                     <div class="form-group">
                         <label for="function-input">Fungsi, $f(x)$</label>
                         <input type="text" id="function-input" name="function" placeholder="contoh: x^2, sin(x), exp(x)"
                             required>
                         <small>Mendukung: trig (sin, cos), log, exp, sqrt, polinomial.</small>
                     </div>
-
+                    <!-- Input untuk Batas Integral -->
                     <div class="bounds-group">
                         <div class="form-group">
                             <label for="lower-bound">Batas Bawah ($a$)</label>
@@ -60,31 +70,38 @@
                             <input type="number" id="upper-bound" name="upper" placeholder="1" step="any" required>
                         </div>
                     </div>
-
+                    <!-- Tombol Submit -->
                     <button type="submit" id="calculate-btn">Hitung Integral</button>
+                    <!-- Tempat pesan error, defaultnya akan dihidden -->
                     <div id="error-message" class="error hidden"></div>
                 </form>
 
+                <!-- Ringkasan Hasil perhitungan -->
                 <div id="result-summary" class="result-summary hidden">
                     <h3>Hasil</h3>
                     <div class="math-result">
+                        <!-- $$..$$ adalah placeholder untuk rumus MathJax -->
                         $$ \int_{a}^{b} f(x) \, dx = \text{?} $$
                     </div>
                 </div>
             </section>
 
+            <!-- Section Kanan: Visualisasi Grafik -->
             <section class="visualization-section card">
                 <h2>Visualisasi</h2>
+                <!-- Div kosong tempat Plotly akan menggambar grafik -->
                 <div id="plot-container"></div>
             </section>
         </main>
 
+        <!-- Section Bawah: Langkah-langkah penyelesaian yang muncul setelah perhitungan -->
         <section id="steps-section" class="steps-section card hidden">
             <h2>Langkah-Langkah Penyelesaian</h2>
             <div id="steps-content"></div>
         </section>
     </div>
 
+    <!-- Menghubungkan file logika JavaScript -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 

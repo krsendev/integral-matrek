@@ -1,44 +1,60 @@
+/* Variabel Global CSS */
+/* Mendefinisikan warna dan ukuran yang bisa dipakai ulang di seluruh file */
 :root {
     --primary-color: #6366f1;
-    /* Indigo 500 */
+    /* Warna utama untuk tombol dan highlight */
     --primary-hover: #4f46e5;
-    /* Indigo 600 */
+    /* Warna saat hover */
     --background: #f8fafc;
-    /* Slate 50 */
+    /* Warna latar belakang halaman */
     --surface: #ffffff;
+    /* Warna permukaan kartu */
     --text-main: #1e293b;
-    /* Slate 800 */
+    /* Warna teks utama */
     --text-muted: #64748b;
-    /* Slate 500 */
+    /* Warna teks sekunder/hint*/
     --border: #e2e8f0;
-    /* Slate 200 */
+    /* Warna garis tepi */
     --error: #ef4444;
-    /* Red 500 */
+    /* Warna untuk error */
     --radius: 12px;
+    /* Kelengkungan sudut  */
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    /* Efek bayangan */
 }
 
+/* Reset CSS Dasar */
 * {
     box-sizing: border-box;
+    /* Agar padding tidak menambah lebar elemen */
     margin: 0;
     padding: 0;
 }
 
+/* Gaya Body (Halaman Utama) */
 body {
     font-family: 'Outfit', sans-serif;
+    /* Menggunakan font 'Outfit' dari Google Fonts */
     background-color: var(--background);
     color: var(--text-main);
     line-height: 1.6;
+    /* Tinggi baris tulisan agar nyaman dibaca */
     padding: 2rem;
+    /* Jarak isi dari tepi layar */
 }
 
+/* Kontainer Layout */
 .container {
     max-width: 1200px;
+    /* Lebar maksimal konten agar tidak terlalu melebar di layar besar */
     margin: 0 auto;
+    /* Posisi tengah (center) horizontal */
 }
 
+/* Header */
 header {
     text-align: center;
+    /* Teks rata tengah */
     margin-bottom: 2.5rem;
 }
 
@@ -54,20 +70,28 @@ header h1 {
     color: var(--text-muted);
 }
 
+/* Layout Grid Utama */
+/* Membagi halaman menjadi 2 kolom: Input (kiri) dan Visualisasi (kanan) */
 .app-layout {
     display: grid;
     grid-template-columns: 350px 1fr;
+    /* Kolom kiri 350px, kolom kanan sisanya (1fr) */
     gap: 2rem;
+    /* Jarak antar kolom */
     margin-bottom: 2rem;
 }
 
+/*Agar bisa Responsif */
+/* Jika lebar layar kurang dari 900px, ubah layout menjadi 1 kolom */
 @media (max-width: 900px) {
     .app-layout {
         grid-template-columns: 1fr;
+        /* 1 Kolom penuh */
     }
 
     body {
         padding: 1rem;
+        /* Kurangi padding di layar kecil */
     }
 
     .container {
@@ -75,6 +99,8 @@ header h1 {
     }
 }
 
+/* Komponen Kartu */
+/* Kotak putih dengan bayangan untuk mengelompokkan konten */
 .card {
     background: var(--surface);
     border-radius: var(--radius);
@@ -89,13 +115,15 @@ h2 {
     margin-bottom: 1.5rem;
     color: var(--text-main);
     border-bottom: 2px solid var(--border);
+    /* Garis bawah judul seksi */
     padding-bottom: 0.5rem;
     display: inline-block;
 }
 
-/* Form Styles */
+/* Gaya Formulir */
 .form-group {
     margin-bottom: 1.5rem;
+    /* Jarak antar input */
 }
 
 label {
@@ -105,6 +133,7 @@ label {
     color: var(--text-main);
 }
 
+/* Input text dan number */
 input[type="text"],
 input[type="number"] {
     width: 100%;
@@ -114,12 +143,15 @@ input[type="number"] {
     font-family: 'Outfit', sans-serif;
     font-size: 1rem;
     transition: border-color 0.2s, box-shadow 0.2s;
+    /* Animasi transisi halus saat diklik */
 }
 
+/* Saat input diklik/fokus */
 input:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    /* Efek glow */
 }
 
 small {
@@ -129,12 +161,15 @@ small {
     color: var(--text-muted);
 }
 
+/* Group untuk Batas Bawah dan Atas (tampil bersebelahan) */
 .bounds-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    /* Dua kolom sama lebar */
     gap: 1rem;
 }
 
+/* Tombol */
 button {
     width: 100%;
     padding: 0.85rem;
@@ -150,32 +185,36 @@ button {
 
 button:hover {
     background-color: var(--primary-hover);
+    /* Warna berubah saat mouse di atasnya */
 }
 
+/* Pesan Error */
 .error {
     margin-top: 1rem;
     padding: 0.75rem;
     background-color: #fef2f2;
+    /* Latar merah muda */
     color: var(--error);
     border-left: 4px solid var(--error);
+    /* Garis tebal di kiri */
     border-radius: 4px;
     font-size: 0.9rem;
 }
 
+/* Utilitas untuk menyembunyikan elemen */
 .hidden {
     display: none;
 }
 
-/* Visualization */
+/* Visualisasi */
 #plot-container {
     width: 100%;
     min-height: 400px;
     background-color: #fafafa;
-    /* Placeholder bg */
     border-radius: 8px;
 }
 
-/* Results */
+/* Hasil Perhitungan */
 .result-summary {
     margin-top: 2rem;
     padding-top: 1.5rem;
@@ -189,12 +228,12 @@ button:hover {
     padding: 1rem;
     background-color: #f1f5f9;
     border-radius: 8px;
-    /* Prevent overflow */
     overflow-x: auto;
+    /* Scroll horizontal jika rumus terlalu panjang */
     max-width: 100%;
 }
 
-/* Steps */
+/* Langkah-langkah */
 .step-item {
     background-color: #f8fafc;
     border: 1px solid var(--border);
